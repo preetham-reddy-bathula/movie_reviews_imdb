@@ -68,6 +68,11 @@ def index():
                             "Review detail": reviewDetail}
                 reviews.append(mydict)
             logging.info("log my final result {}".format(reviews))
+            
+            client = pymongo.MongoClient("mongodb+srv://mongodbfirst:mongodbfirst@<password>.v394uy7.mongodb.net/?retryWrites=true&w=majority")
+            db =client['imdb_reviews_db']
+            coll= db['imdb_reviews_collections']
+            coll.insert_many(reviews)
 
 
             return render_template('result.html', reviews=reviews[0:(len(reviews)-1)])
